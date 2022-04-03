@@ -1,17 +1,21 @@
 import express from 'express';
 import multer from 'multer';
+import path from 'path';
 
 const app = express();
 
 const storage = multer.diskStorage({
+
+    // handle the destination '-'
     destination: (req, file, cb) => {
         // error first callback
         cb(null, 'uploads/');
     },
 
+    // allows operations with the file name
     filename: (req, file, cb) => {
         // error first callback
-        cb(null, `${file.fieldname}-${Date.now()}`);
+        cb(null, `${file.fieldname}-${Date.now()}.${path.extname(file.originalname)}`);
     }
 });
 
