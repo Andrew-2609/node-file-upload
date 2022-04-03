@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         // error first callback
         cb(null, `${file.fieldname}-${Date.now()}.${path.extname(file.originalname)}`);
+        // cb(null, file.originalname); would save the uploaded file with its original name
     }
 });
 
