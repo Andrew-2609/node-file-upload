@@ -2,6 +2,19 @@ import express from 'express';
 import multer from 'multer';
 
 const app = express();
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        // error first callback
+        cb(null, 'uploads/');
+    },
+
+    filename: (req, file, cb) => {
+        // error first callback
+        cb(null, `${file.fieldname}-${Date.now()}`);
+    }
+});
+
 const upload = multer({ dest: 'uploads/' });
 
 app.use(express.static('public'));
